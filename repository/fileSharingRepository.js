@@ -1,10 +1,10 @@
-const fileModel = require('../models/File');
+const File = require('../models/file');
 
 async function deleteData ()
 {
     try
     {
-        await fileModel.updateMany(
+        await File.updateMany(
             {expiryAt : {$lt : Date.now()}},
             {$set : {isDeleted : true}}
         );
