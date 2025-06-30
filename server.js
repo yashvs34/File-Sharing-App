@@ -11,7 +11,7 @@ app.use(express.json());
 
 app.get('/', (req, res) => {
     res.send("Welcome to File-Sharing-App");
-})
+});
 
 app.use('/', fileUploadRoute);
 app.use('/', sendMailRoute);
