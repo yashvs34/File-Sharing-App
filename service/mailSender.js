@@ -6,8 +6,8 @@ async function sendMail ({emailTo, emailFrom, link, filename, size})
     await transporter.sendMail({
         from : emailFrom,
         to : emailTo,
-        subject : "Look what i found for you",
-        html : `<div style="color:red;font-weight:bolder;">I love you mota hathi babu</div>`
+        subject : `New File Shared`,
+        html : `You have been invited by ${emailFrom} to view ${filename} :- ${link}`
     })
 }
 
