@@ -3,8 +3,9 @@ dotenv.config();
 const router = express.Router();
 const cloudinary = require('../configs/cloudinaryConfig');
 const { axios } = require('axios');
+const fileTypeValidator = require('../middlewares/fileValidator');
 
-router.post('/upload', upload.single('file'), async (req, res) => {
+router.post('/upload', upload.single('file'), fileTypeValidator, async (req, res) => {
     const expiry = req.body.expiry;
 
     if (!req.file)
