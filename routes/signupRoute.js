@@ -1,3 +1,4 @@
+const express = require('express');
 const router = express.Router();
 const signupValidator = require('../middlewares/inputValidator');
 const saveUser = require('../repository/userRepository');
