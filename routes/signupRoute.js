@@ -1,5 +1,6 @@
 const router = express.Router();
 const zod = require('zod');
+const saveUser = require('../repository/userRepository');
 
 const signupSchema = z.object({
     userName : zod.email(),
@@ -22,15 +23,19 @@ router.post('/signup', async (req, res) => {
         {
             res.send('Invalid inputs');
         }
-        else
+        else if (findAlreadyExistingUser({userName}))
         {
-            await saveUser({userName, hashedPassword, firstName, lastName});
+            res.send('User already exists');
         }
+
+        await saveUser({userName, hashedPassword, firstName, lastName});
+
+        res.send('Account created successfully');
     }
     catch (error)
     {
-        res.send('Some error occurred');
         console.log(error);
+        res.send('Error while signing up');
     }
 });
 
