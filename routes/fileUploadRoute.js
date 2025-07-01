@@ -28,6 +28,7 @@ router.post('/upload', upload.single('file'), async (req, res) => {
     });
 
     const createdFile = await File.create({
+        userName : req.body.userName,
         shortId,
         cloudinaryUrl : result.url,
         fileName : req.file.originalName,
