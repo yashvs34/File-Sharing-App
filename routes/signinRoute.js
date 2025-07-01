@@ -1,6 +1,7 @@
 const router = express.Router();
+const signinValidator = require('../middlewares/inputValidator');
 
-router.get('/signin', (req, res) => {
+router.get('/signin', signinValidator, (req, res) => {
 
 });
 
