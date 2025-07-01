@@ -1,6 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 dotenv.config();
+const upload = multer({ dest: 'uploads/' })
 const router = express.Router();
 const cloudinary = require('../configs/cloudinaryConfig');
 const { axios } = require('axios');
