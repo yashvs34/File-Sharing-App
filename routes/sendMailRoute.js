@@ -1,18 +1,16 @@
 const router = express.Router();
 const sendMail = require('./service/mailSender');
 
-let emailOptions = {
-    emailFrom : "yashvardhansingh232@gmail.com",
-    emailTo : "vidhi.singh.parihar.2711@gmail.com",
-    link : "abcd",
-    fileName : "abdc",
-    size : 1234
-}
-
-router.get('/send', async (req, res) => {
+router.post('/send', async (req, res) => {
     try
     {
-        await sendMail(emailOptions);
+        const emailFrom = req.body.emailFrom;
+        const emailTo = req.body.emailTo;
+        const link = req.body.link;
+        const fileName = req.body.fileName;
+        const size = req.body.size;
+
+        await sendMail({emailFrom, emailTo, link, fileName, size});
         res.send("Email sent successfully");
     }
     catch (error)
