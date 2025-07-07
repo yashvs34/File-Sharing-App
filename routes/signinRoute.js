@@ -1,37 +1,45 @@
 const express = require('express');
 const router = express.Router();
-const signinValidator = require('../middlewares/inputValidator');
-const hashPassword = require('../service/passwordHashing');
-const findUser = require('../repository/userRepository');
+const {signinValidator} = require('../middlewares/inputValidator');
+const {comparePassword} = require('../service/passwordHashing');
+const {findUser} = require('../repository/userRepository');
 const jwt = require('jsonwebtoken');
 
-router.get('/signin', signinValidator, async (req, res) => {
-    const alreadySignedin = req.body.token;
-
-    const decoded = alreadySignedin ? jwt.verify(alreadySignedin, process.env.JWT_SECRET) : null;
-
-    const userName = decoded ? decoded.userName : req.body.userName;
-    const password = decoded ? decoded.password : req.body.password;
-
-    const hashedPassword = hashPassword(password);
-
-    const user = await findUser({userName});
-
-    if (user.hashedPassword != hashedPassword)
+module.exports = router.post('/signin', signinValidator, async (req, res) => {
+    try
     {
-        res.send('Your password is incorrect');
+        const alreadySignedin = req.body.token;
+
+        const decoded = alreadySignedin ? await jwt.verify(alreadySignedin, process.env.JWT_SECRET) : null;
+        
+        const userName = decoded ? decoded.userName : req.body.userName;
+        const password = decoded ? decoded.password : req.body.password;
+        
+        const user = await findUser({userName});
+        
+        const match = await comparePassword(password, user.hashedPassword);
+
+        if (!match)
+        {
+            res.send('Invalid user or password');
+            return;
+        }
+        else if (decoded)
+        {
+            res.send("Valid user");
+            return;
+        }
+
+        const token = await jwt.sign({userName, password}, process.env.JWT_SECRET);
+
+        res.json({
+            "message" : "User signin successfull",
+            token : token
+        });
     }
-    else if (decoded)
+    catch (error)
     {
-        res.send("Valid user");
+        console.log(error);
+        res.send("Error while signing in");
     }
-
-    const token = jwt.sign({userName, hashedPassword}, process.env.JWT_SECRET);
-
-    res.json({
-        "message" : "User signin successfull",
-        token : token
-    });
 });
-
-module.exports = signinRoute;

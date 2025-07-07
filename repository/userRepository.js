@@ -12,4 +12,4 @@ async function findUser ({userName})
     return await User.findOne({userName});
 }
 
-module.exports = saveUser, findUser;
+module.exports = {saveUser, findUser};

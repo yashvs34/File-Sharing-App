@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const fileSchema = new mongoose.Schema({
+    userName : {
+        type : String,
+        required : true
+    },
     shortUrl : {
         type : String,
         required : true,
@@ -8,6 +12,14 @@ const fileSchema = new mongoose.Schema({
     },
     cloudinaryUrl : {
         type : String,
+        required : true
+    },
+    fileName : {
+        type : String,
+        required : true
+    },
+    size : {
+        type : Number,
         required : true
     },
     createdAt : {
@@ -21,7 +33,6 @@ const fileSchema = new mongoose.Schema({
     },
     isExpired : {
         type : Boolean,
-        required : true,
         default : false
     }
 });

@@ -1,19 +1,27 @@
 const express = require('express');
 const router = express.Router();
-const signupValidator = require('../middlewares/inputValidator');
-const saveUser = require('../repository/userRepository');
-const findUser = require('../repository/userRepository');
-const hashPassword = require('../service/passwordHashing');
+const {signupValidator} = require('../middlewares/inputValidator');
+const {saveUser} = require('../repository/userRepository');
+const {findUser} = require('../repository/userRepository');
+const {hashPassword} = require('../service/passwordHashing');
 
-router.post('/signup', signupValidator, async (req, res) => {
+module.exports = router.post('/signup', signupValidator, async (req, res) => {
     try
     {
-        if (findUser({userName}))
+        const userName = req.body.userName;
+        const password = req.body.password;
+        const firstName = req.body.firstName;
+        const lastName = req.body.lastName;
+
+        const result = await findUser({userName});
+        
+        if (result)
         {
             res.send('User already exists');
+            return;
         }
-        
-        const hashedPassword = hashPassword(password);
+            
+        const hashedPassword = await hashPassword(password);
 
         await saveUser({userName, hashedPassword, firstName, lastName});
         
@@ -25,5 +33,3 @@ router.post('/signup', signupValidator, async (req, res) => {
         res.send('Error while signing up');
     }
 });
-
-module.exports = signupRoute;
