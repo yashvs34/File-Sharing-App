@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const sendMail = require('../service/mailSender');
+const validateToken = require('../middlewares/tokenValidator');
 
-module.exports = router.post('/send', async (req, res) => {
+module.exports = router.post('/send', validateToken, async (req, res) => {
     try
     {
         const emailFrom = req.body.emailFrom;

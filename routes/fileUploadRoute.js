@@ -9,8 +9,9 @@ const cloudinary = require('../configs/cloudinaryConfig');
 const axios = require('axios');
 const File = require('../models/file');
 const fileTypeValidator = require('../middlewares/fileValidator');
+const validateToken = require('../middlewares/tokenValidator');
 
-module.exports = router.post('/upload', upload.single('file'), fileTypeValidator, async (req, res) => {
+module.exports = router.post('/upload', validateToken, upload.single('file'), fileTypeValidator, async (req, res) => {
     try
     {
         const expiry = req.body.expiry;
