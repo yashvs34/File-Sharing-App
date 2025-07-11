@@ -31,7 +31,8 @@ module.exports = router.post('/upload', validateToken, upload.single('file'), fi
         await axios.get('https://url-shortner-s1t7.onrender.com');
         
         const response = await axios.post('https://url-shortner-s1t7.onrender.com/shorten', {
-            url : result.url
+            url : result.url,
+            clientType : 'backend'
         });
         
         const shortId = response.data.shortUrl;
