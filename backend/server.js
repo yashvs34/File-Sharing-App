@@ -10,6 +10,7 @@ const signinRoute = require('./routes/signinRoute');
 const cors = require('cors');
 
 app.use(cors());
+app.options('*', cors());
 app.use(express.json());
 
 app.get('/', (req, res) => {
