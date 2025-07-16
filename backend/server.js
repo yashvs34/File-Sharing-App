@@ -7,7 +7,9 @@ const fileUploadRoute = require('./routes/fileUploadRoute');
 const sendMailRoute = require('./routes/sendMailRoute');
 const signupRoute = require('./routes/signupRoute');
 const signinRoute = require('./routes/signinRoute');
+const cors = require('cors');
 
+app.use(cors());
 app.use(express.json());
 
 app.get('/', (req, res) => {
