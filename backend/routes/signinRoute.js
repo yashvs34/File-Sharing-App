@@ -30,7 +30,7 @@ module.exports = router.post('/signin', signinValidator, async (req, res) => {
             return;
         }
 
-        const token = await jwt.sign({userName, password}, process.env.JWT_SECRET);
+        const token = await jwt.sign(user, process.env.JWT_SECRET);
 
         res.json({
             "message" : "User signin successfull",
