@@ -12,8 +12,9 @@ const cors = require('cors');
 app.use(cors());
 app.use(express.json());
 
+connectDB();
+
 app.get('/', (req, res) => {
-    connectDB();
     res.send("Welcome to File-Sharing-App");
 });
 
