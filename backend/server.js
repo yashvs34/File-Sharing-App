@@ -10,11 +10,11 @@ const signinRoute = require('./routes/signinRoute');
 const cors = require('cors');
 
 app.use(cors());
-app.options('*', cors());
 app.use(express.json());
 
+connectDB();
+
 app.get('/', (req, res) => {
-    connectDB();
     res.send("Welcome to File-Sharing-App");
 });
 

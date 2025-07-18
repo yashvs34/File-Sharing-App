@@ -5,7 +5,7 @@ const {comparePassword} = require('../service/passwordHashing');
 const {findUser} = require('../repository/userRepository');
 const jwt = require('jsonwebtoken');
 
-module.exports = router.post('/signin', signinValidator, async (req, res) => {
+router.post('/signin', signinValidator, async (req, res) => {
     try
     {
         const alreadySignedin = req.body.token;
@@ -16,12 +16,18 @@ module.exports = router.post('/signin', signinValidator, async (req, res) => {
         const password = decoded ? decoded.password : req.body.password;
         
         const user = await findUser({userName});
+
+        if (!user)
+        {
+            res.send('Invalid username');
+            return;
+        }
         
-        const match = await comparePassword(password, user.hashedPassword);
+        const match = user ? await comparePassword(password, user.hashedPassword) : null;
 
         if (!match)
         {
-            res.send('Invalid user or password');
+            res.send('Invalid password');
             return;
         }
         else if (decoded)
@@ -30,7 +36,7 @@ module.exports = router.post('/signin', signinValidator, async (req, res) => {
             return;
         }
 
-        const token = await jwt.sign(user, process.env.JWT_SECRET);
+        const token = jwt.sign(user, process.env.JWT_SECRET);
 
         res.json({
             "message" : "User signin successfull",
@@ -43,3 +49,5 @@ module.exports = router.post('/signin', signinValidator, async (req, res) => {
         res.send("Error while signing in");
     }
 });
+
+module.exports = router;

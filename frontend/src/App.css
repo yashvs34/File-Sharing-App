@@ -1,42 +1,105 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+
+.signin-page
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.signin-container
+{
+    height: 280px;
+    width: 300px;
+    display: grid;
+    grid-template-rows: 50px 150px 30px 50px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px grey;
+    justify-content: center;
+    align-items: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.signin-text
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 35px;
+    font-weight: bolder;
 }
 
-.card {
-  padding: 2em;
+.signin-input-container
+{
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.read-the-docs {
-  color: #888;
+.signin-email-input
+{
+    outline: none;
+    height: 35px;
+    font-size: 15px;
+    padding: 5px;
+    border: 1px solid white;
+    border-bottom: 2px solid blue;
+    border-radius: 5px;
+}
+
+.signin-password-input
+{
+    outline: none;
+    height: 35px;
+    font-size: 15px;
+    padding: 5px;
+    border: 1px solid white;
+    border-bottom: 2px solid blue;
+    border-radius: 5px;
+}
+
+.current-state
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    color: red;
+}
+
+.signin-button
+{
+    height: 30px;
+    width: 250px;
+    display: flex;
+    margin-top: -30px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(17, 17, 123);
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border: 0px solid white;
+    border-radius: 40px;
+    transition: transform ease;
+}
+
+.signin-button:hover
+{
+    transform: scale(1.1);
+    background-color: rgb(3, 3, 229);
+    transition-duration: 200ms;
+    cursor: pointer;
+}
+
+.signin-button:focus
+{
+    transform: scale(1.1);
+    background-color: rgb(3, 3, 229);
+    transition-duration: 200ms;
+    cursor: pointer;
 }
