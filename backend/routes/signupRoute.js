@@ -5,7 +5,7 @@ const {saveUser} = require('../repository/userRepository');
 const {findUser} = require('../repository/userRepository');
 const {hashPassword} = require('../service/passwordHashing');
 
-module.exports = router.post('/signup', signupValidator, async (req, res) => {
+router.post('/signup', signupValidator, async (req, res) => {
     try
     {
         const userName = req.body.userName;
@@ -33,3 +33,5 @@ module.exports = router.post('/signup', signupValidator, async (req, res) => {
         res.send('Error while signing up');
     }
 });
+
+module.exports = router;

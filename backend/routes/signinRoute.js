@@ -5,7 +5,7 @@ const {comparePassword} = require('../service/passwordHashing');
 const {findUser} = require('../repository/userRepository');
 const jwt = require('jsonwebtoken');
 
-module.exports = router.post('/signin', signinValidator, async (req, res) => {
+router.post('/signin', signinValidator, async (req, res) => {
     try
     {
         const alreadySignedin = req.body.token;
@@ -43,3 +43,5 @@ module.exports = router.post('/signin', signinValidator, async (req, res) => {
         res.send("Error while signing in");
     }
 });
+
+module.exports = router;
