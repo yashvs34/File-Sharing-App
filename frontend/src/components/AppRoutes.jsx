@@ -3,6 +3,7 @@ import { useRecoilState } from "recoil";
 import { authState } from "../atoms/authAtom";
 import Signin from './Signin'
 import Signup from "./Signup";
+import Dashboard from "./Dashboard"
 import { Route, Routes, useNavigate } from 'react-router-dom'
 
 function AppRoutes ()
@@ -15,10 +16,6 @@ function AppRoutes ()
         {
             navigate('/dashboard');
         }
-        else
-        {
-            navigate('/signin');
-        }
     }, [auth.isLoggedIn, navigate]);
     
     return (
@@ -27,7 +24,7 @@ function AppRoutes ()
                 <Route path='/' element={<Signin/>} />
                 <Route path='/signin' element={<Signin/>} />
                 <Route path='/signup' element={<Signup/>} />
-                {/* <Route path='/dashboard' element={<Dashboard/>} /> */}
+                <Route path='/dashboard' element={<Dashboard/>} />
             </Routes>
         </>
     )
