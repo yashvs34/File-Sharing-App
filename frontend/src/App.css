@@ -10,10 +10,10 @@
 
 .signin-container
 {
-    height: 280px;
+    height: 250px;
     width: 300px;
     display: grid;
-    grid-template-rows: 50px 150px 30px 50px;
+    grid-template-rows: 40px 100px 20px 40px 20px;
     border-radius: 15px;
     box-shadow: 0 0 10px grey;
     justify-content: center;
@@ -66,7 +66,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 20px;
     color: red;
 }
 
@@ -75,7 +74,6 @@
     height: 30px;
     width: 250px;
     display: flex;
-    margin-top: -30px;
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -85,14 +83,13 @@
     font-weight: bold;
     border: 0px solid white;
     border-radius: 40px;
-    transition: transform ease;
 }
 
 .signin-button:hover
 {
     transform: scale(1.1);
     background-color: rgb(3, 3, 229);
-    transition-duration: 200ms;
+    transition-duration: 300ms;
     cursor: pointer;
 }
 
@@ -100,6 +97,34 @@
 {
     transform: scale(1.1);
     background-color: rgb(3, 3, 229);
-    transition-duration: 200ms;
+    transition-duration: 300ms;
     cursor: pointer;
+}
+
+.signup-in-signin
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signup-in-signin-text
+{
+    font-size: 15px;
+}
+
+.signup-in-signin-link
+{
+    margin: 5px;
+    cursor: pointer;
+    text-decoration: underline;
+    color: rgb(110, 110, 255);
+    font-size: 20px;
+}
+
+.signup-in-signin-link:hover
+{
+    transform: scale(1.1);
+    color: blue;
+    transition-duration: 300ms;
 }

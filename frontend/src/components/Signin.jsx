@@ -1,12 +1,15 @@
-import { useEffect, useState } from "react"
-import { useNavigate } from "react-router";
+import { useState } from "react"
+import { useNavigate } from "react-router-dom";
 import axios from "axios"
+import { useRecoilState } from "recoil";
+import { authState } from "../atoms/authAtom";
 
 function Signin ()
 {
     const [emailInput, setEmailInput] = useState();
     const [passwordInput, setPasswordInput] = useState();
     const [currentState, setCurrentState] = useState("");
+    const [auth, setAuth] = useRecoilState(authState);
 
     const navigate = useNavigate();
 
@@ -55,15 +58,27 @@ function Signin ()
                         else if (response.data === "Valid user")
                         {
                             setCurrentState("Signin successfull");
-                            navigate('/dashboard');
+                            setAuth({
+                                isLoggedIn : true
+                            })
                             return;
                         }
-                        console.log(response.data);
                         setCurrentState("Some error occurred");
                         return;
                     }}>
                         Submit
                     </button>
+
+                    <div className="signup-in-signin">
+                        <div className="signup-in-signin-text">
+                            Don't have an account?
+                        </div>
+                        <div className="signup-in-signin-link" onClick={() => {
+                            navigate('/signup');
+                        }}>
+                            Signup
+                        </div>
+                    </div>
                 </div>
             </div>
         </>
