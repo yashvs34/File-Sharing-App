@@ -4,6 +4,7 @@ const {signinValidator} = require('../middlewares/inputValidator');
 const {comparePassword} = require('../service/passwordHashing');
 const {findUser} = require('../repository/userRepository');
 const jwt = require('jsonwebtoken');
+const { findData } = require('../repository/fileSharingRepository');
 
 router.post('/signin', signinValidator, async (req, res) => {
     try
@@ -32,7 +33,10 @@ router.post('/signin', signinValidator, async (req, res) => {
         }
         else if (decoded)
         {
-            res.send("Valid user");
+            res.json({
+                message : "Valid user",
+                userData : await findData({userName})
+            });
             return;
         }
 
@@ -40,8 +44,11 @@ router.post('/signin', signinValidator, async (req, res) => {
 
         res.json({
             "message" : "User signin successfull",
-            token : token
+            token : token,
+            userData : await findData({userName})
         });
+
+        return;
     }
     catch (error)
     {
