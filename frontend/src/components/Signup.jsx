@@ -22,25 +22,25 @@ function Signup ()
 
                     <div className="signup-input-container">
                         <div>
-                            <input type="email" placeholder="Enter email" className="signup-email-input" onKeyDown={(event) => {
+                            <input type="email" placeholder="Enter email" className="signup-email-input" onChange={(event) => {
                                 setEmailInput(event.target.value);
                             }} />
                         </div>
 
                         <div>
-                            <input type="password" placeholder="Enter password" className="signup-password-input" onKeyDown={(event) => {
+                            <input type="password" placeholder="Enter password" className="signup-password-input" onChange={(event) => {
                                 setPasswordInput(event.target.value);
                             }} />
                         </div>
 
                         <div>
-                            <input type="text" placeholder="Enter Firstname" className="signup-firstName-input" onKeyDown={(event) => {
+                            <input type="text" placeholder="Enter Firstname" className="signup-firstName-input" onChange={(event) => {
                                 setFirstNameInput(event.target.value);
                             }} />
                         </div>
 
                         <div>
-                            <input type="text" placeholder="Enter Lastname" className="signup-lastName-input" onKeyDown={(event) => {
+                            <input type="text" placeholder="Enter Lastname" className="signup-lastName-input" onChange={(event) => {
                                 setLastNameInput(event.target.value);
                             }} />
                         </div>
