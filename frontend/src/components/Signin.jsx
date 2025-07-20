@@ -35,7 +35,7 @@ function Signin ()
                         </div>
                     </div>
 
-                    {<div className="current-state">{currentState}</div>}
+                    {<div className="signin-current-state">{currentState}</div>}
 
                     <button className="signin-button" onClick={async () => {
                         setCurrentState("Signing you in...");

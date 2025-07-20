@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { authState } from "../atoms/authAtom";
-import Signin from '../components/Signin'
+import Signin from './Signin'
+import Signup from "./Signup";
 import { Route, Routes, useNavigate } from 'react-router-dom'
 
 function AppRoutes ()
@@ -21,8 +22,8 @@ function AppRoutes ()
             <Routes>
                 <Route path='/' element={<Signin/>} />
                 <Route path='/signin' element={<Signin/>} />
-                {/* <Route path='/signup' element={<Signup/>} />
-                <Route path='/dashboard' element={<Dashboard/>} /> */}
+                <Route path='/signup' element={<Signup/>} />
+                {/* <Route path='/dashboard' element={<Dashboard/>} /> */}
             </Routes>
         </>
     )
