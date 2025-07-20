@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios"
 import { useRecoilState } from "recoil";
 import { authState } from "../atoms/authAtom";
+import { useEffect } from "react";
+import { userState } from "../atoms/userAtom";
 
 function Signin ()
 {
@@ -10,8 +12,37 @@ function Signin ()
     const [passwordInput, setPasswordInput] = useState();
     const [currentState, setCurrentState] = useState("");
     const [auth, setAuth] = useRecoilState(authState);
+    const [user, setUser] = useRecoilState(userState);
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const verifyToken = async () => {
+            const token = localStorage.getItem("authToken");
+    
+            if (token)
+            {
+                const response = await axios.post('http://localhost:8081/signin', {
+                    "token" : token
+                });
+
+                if (response.data.message === "Valid user")
+                {
+                    setCurrentState("Signin successfull");
+                    setAuth({
+                        isLoggedIn : true
+                    });
+                    setUser({
+                        user : response.data.userData
+                    });
+                }
+            }
+
+            return;
+        }
+
+        verifyToken();
+    }, []);
 
     return (
         <>
@@ -23,13 +54,13 @@ function Signin ()
 
                     <div className="signin-input-container">
                         <div>
-                            <input type="email" placeholder="Enter email" className="signin-email-input" onKeyDown={(event) => {
+                            <input type="email" placeholder="Enter email" className="signin-email-input" onChange={(event) => {
                                 setEmailInput(event.target.value);
                             }} />
                         </div>
 
                         <div>
-                            <input type="password" placeholder="Enter password" className="signin-password-input" onKeyDown={(event) => {
+                            <input type="password" placeholder="Enter password" className="signin-password-input" onChange={(event) => {
                                 setPasswordInput(event.target.value);
                             }} />
                         </div>
@@ -55,14 +86,30 @@ function Signin ()
                             setCurrentState("Invalid password!");
                             return;
                         }
-                        else if (response.data === "Valid user")
+                        else if (response.data.message === "Valid user")
                         {
                             setCurrentState("Signin successfull");
                             setAuth({
                                 isLoggedIn : true
-                            })
+                            });
+                            setUser({
+                                user : response.data.userData
+                            });
                             return;
                         }
+                        else if (response.data.message === "User signin successfull")
+                        {
+                            setCurrentState("Signin successfull");
+                            localStorage.setItem("authToken", response.data.token);
+                            setAuth({
+                                isLoggedIn : true
+                            });
+                            setUser({
+                                user : response.data.userData
+                            });
+                            return;
+                        }
+
                         setCurrentState("Some error occurred");
                         return;
                     }}>
