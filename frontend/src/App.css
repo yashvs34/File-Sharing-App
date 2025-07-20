@@ -1,3 +1,4 @@
+/* -------------------------------SIGNIN COMPONENT------------------------------- */
 
 .signin-page
 {
@@ -61,7 +62,7 @@
     border-radius: 5px;
 }
 
-.current-state
+.signin-current-state
 {
     display: flex;
     justify-content: center;
@@ -123,6 +124,161 @@
 }
 
 .signup-in-signin-link:hover
+{
+    transform: scale(1.1);
+    color: blue;
+    transition-duration: 300ms;
+}
+
+/* -------------------------------SIGNUP COMPONENT------------------------------- */
+
+
+.signup-page
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+.signup-container
+{
+    height: 300px;
+    width: 300px;
+    display: grid;
+    grid-template-rows: 40px 150px 20px 40px 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px grey;
+    justify-content: center;
+    align-items: center;
+}
+
+.signup-text
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 35px;
+    font-weight: bolder;
+}
+
+.signup-input-container
+{
+    height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.signup-email-input
+{
+    outline: none;
+    height: 35px;
+    font-size: 15px;
+    padding: 5px;
+    border: 1px solid white;
+    border-bottom: 2px solid blue;
+    border-radius: 5px;
+}
+
+.signup-password-input
+{
+    outline: none;
+    height: 35px;
+    font-size: 15px;
+    padding: 5px;
+    border: 1px solid white;
+    border-bottom: 2px solid blue;
+    border-radius: 5px;
+}
+
+.signup-firstName-input
+{
+    outline: none;
+    height: 35px;
+    font-size: 15px;
+    padding: 5px;
+    border: 1px solid white;
+    border-bottom: 2px solid blue;
+    border-radius: 5px;
+}
+
+.signup-lastName-input
+{
+    outline: none;
+    height: 35px;
+    font-size: 15px;
+    padding: 5px;
+    border: 1px solid white;
+    border-bottom: 2px solid blue;
+    border-radius: 5px;
+}
+
+.signup-current-state
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: red;
+}
+
+.signup-button
+{
+    height: 30px;
+    width: 250px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(17, 17, 123);
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border: 0px solid white;
+    border-radius: 40px;
+}
+
+.signup-button:hover
+{
+    transform: scale(1.1);
+    background-color: rgb(3, 3, 229);
+    transition-duration: 300ms;
+    cursor: pointer;
+}
+
+.signup-button:focus
+{
+    transform: scale(1.1);
+    background-color: rgb(3, 3, 229);
+    transition-duration: 300ms;
+    cursor: pointer;
+}
+
+.signin-in-signup
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signin-in-signup-text
+{
+    font-size: 15px;
+}
+
+.signin-in-signup-link
+{
+    margin: 5px;
+    cursor: pointer;
+    text-decoration: underline;
+    color: rgb(110, 110, 255);
+    font-size: 20px;
+}
+
+.signin-in-signup-link:hover
 {
     transform: scale(1.1);
     color: blue;

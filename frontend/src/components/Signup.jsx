@@ -86,7 +86,7 @@ function Signup ()
                             Already have an account?
                         </div>
                         <div className="signin-in-signup-link" onClick={() => {
-                            navigate('/signup');
+                            navigate('/signin');
                         }}>
                             Signin
                         </div>
