@@ -10,7 +10,6 @@ async function connectDB ()
     catch (error)
     {
         console.log("Error connecting to MONGODB ", error);
-        res.send("Error connecting to MONGODB");
     }
 }
 
