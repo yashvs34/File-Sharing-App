@@ -15,6 +15,10 @@ function AppRoutes ()
         {
             navigate('/dashboard');
         }
+        else
+        {
+            navigate('/signin');
+        }
     }, [auth.isLoggedIn, navigate]);
     
     return (
