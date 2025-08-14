@@ -22,7 +22,6 @@ async function findData ({userName})
     try
     {
         const user = await File.find({userName});
-        console.log(user);
         return user;
     }
     catch (error)
