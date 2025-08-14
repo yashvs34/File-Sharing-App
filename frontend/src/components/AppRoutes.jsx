@@ -19,7 +19,6 @@ function AppRoutes ()
     useEffect(() => {
         const verifyToken = async () => {
             const token = localStorage.getItem("authToken");
-
             if (token)
             {
                 const response = await axios.post('http://localhost:8081/signin', {

@@ -284,3 +284,19 @@
     color: blue;
     transition-duration: 300ms;
 }
+
+/* -------------------------------DASHBOARD COMPONENT------------------------------- */
+
+.dashboard
+{
+    height: 100%;
+    width: 100%;
+}
+
+.file-input-container
+{
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
