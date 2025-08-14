@@ -1,14 +1,52 @@
-import { useEffect, useState } from "react"
-import { useNavigate } from "react-router";
+import { useState } from "react"
+import { useNavigate } from "react-router-dom";
 import axios from "axios"
+import { useRecoilState } from "recoil";
+import { authState } from "../atoms/authAtom";
+import { useEffect } from "react";
+import { userState } from "../atoms/userAtom";
+import signinState from "../atoms/signinStateAtom";
 
 function Signin ()
 {
     const [emailInput, setEmailInput] = useState();
     const [passwordInput, setPasswordInput] = useState();
-    const [currentState, setCurrentState] = useState("");
+    const [auth, setAuth] = useRecoilState(authState);
+    const [user, setUser] = useRecoilState(userState);
+    const [currentState, setCurrentState] = useRecoilState(signinState);
 
     const navigate = useNavigate();
+
+    // useEffect(() => {
+    //     const verifyToken = async () => {
+    //         const token = localStorage.getItem("authToken");
+    
+    //         if (token)
+    //         {
+    //             const response = await axios.post('http://localhost:8081/signin', {
+    //                 "token" : token
+    //             });
+
+    //             if (response.data.message === "Valid user")
+    //             {
+    //                 setCurrentState({
+    //                     signinState : "Signin successfull"
+    //                 });
+    //                 setAuth({
+    //                     isLoggedIn : true
+    //                 });
+    //                 setUser({
+    //                     user : response.data.userData
+    //                 });
+    //                 navigate('/dashboard');
+    //             }
+    //         }
+
+    //         return;
+    //     }
+
+    //     verifyToken();
+    // }, [auth.isLoggedIn]);
 
     return (
         <>
@@ -20,22 +58,24 @@ function Signin ()
 
                     <div className="signin-input-container">
                         <div>
-                            <input type="email" placeholder="Enter email" className="signin-email-input" onKeyDown={(event) => {
+                            <input type="email" placeholder="Enter email" className="signin-email-input" onChange={(event) => {
                                 setEmailInput(event.target.value);
                             }} />
                         </div>
 
                         <div>
-                            <input type="password" placeholder="Enter password" className="signin-password-input" onKeyDown={(event) => {
+                            <input type="password" placeholder="Enter password" className="signin-password-input" onChange={(event) => {
                                 setPasswordInput(event.target.value);
                             }} />
                         </div>
                     </div>
 
-                    {<div className="current-state">{currentState}</div>}
+                    {<div className="signin-current-state">{currentState.signinState}</div>}
 
                     <button className="signin-button" onClick={async () => {
-                        setCurrentState("Signing you in...");
+                        setCurrentState({
+                            signinState : "Signing you in..."
+                        });
 
                         const response = await axios.post('http://localhost:8081/signin', {
                             userName : emailInput,
@@ -44,26 +84,64 @@ function Signin ()
 
                         if (response.data === "Invalid username")
                         {
-                            setCurrentState("No user found!");
+                            setCurrentState({
+                                signinState : "No user found!"
+                            });
                             return;
                         }
                         else if (response.data === "Invalid password")
                         {
-                            setCurrentState("Invalid password!");
+                            setCurrentState({
+                                signinState : "Invalid password!"
+                            });
                             return;
                         }
-                        else if (response.data === "Valid user")
+                        else if (response.data.message === "Valid user")
                         {
-                            setCurrentState("Signin successfull");
-                            navigate('/dashboard');
+                            setCurrentState({
+                                signinState : "Signin successfull"
+                            });
+                            setAuth({
+                                isLoggedIn : true
+                            });
+                            setUser({
+                                user : response.data.userData
+                            });
                             return;
                         }
-                        console.log(response.data);
-                        setCurrentState("Some error occurred");
+                        else if (response.data.message === "User signin successfull")
+                        {
+                            setCurrentState({
+                                signinState : "Signin successfull"
+                            });
+                            localStorage.setItem("authToken", response.data.token);
+                            setAuth({
+                                isLoggedIn : true
+                            });
+                            setUser({
+                                user : response.data.userData
+                            });
+                            return;
+                        }
+
+                        setCurrentState({
+                            signinState : "Some error occurred"
+                        });
                         return;
                     }}>
                         Submit
                     </button>
+
+                    <div className="signup-in-signin">
+                        <div className="signup-in-signin-text">
+                            Don't have an account?
+                        </div>
+                        <div className="signup-in-signin-link" onClick={() => {
+                            navigate('/signup');
+                        }}>
+                            Signup
+                        </div>
+                    </div>
                 </div>
             </div>
         </>

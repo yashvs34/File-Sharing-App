@@ -7,6 +7,7 @@ const fileUploadRoute = require('./routes/fileUploadRoute');
 const sendMailRoute = require('./routes/sendMailRoute');
 const signupRoute = require('./routes/signupRoute');
 const signinRoute = require('./routes/signinRoute');
+const userDataRoute = require('./routes/userDataRoute');
 const cors = require('cors');
 
 app.use(cors());
@@ -20,6 +21,7 @@ app.get('/', (req, res) => {
 
 app.use('/', signupRoute);
 app.use('/', signinRoute);
+app.use('/', userDataRoute);
 app.use('/', fileUploadRoute);
 app.use('/', sendMailRoute);
 

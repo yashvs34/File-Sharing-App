@@ -17,4 +17,18 @@ async function deleteData ()
     }
 }
 
-module.exports = {deleteData}
+async function findData ({userName})
+{
+    try
+    {
+        const user = await File.find({userName});
+        console.log(user);
+        return user;
+    }
+    catch (error)
+    {
+        console.log("Error in finding user's data", error);
+    }
+}
+
+module.exports = {deleteData, findData}
