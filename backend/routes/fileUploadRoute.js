@@ -11,7 +11,7 @@ const File = require('../models/file');
 const fileTypeValidator = require('../middlewares/fileValidator');
 const validateToken = require('../middlewares/tokenValidator');
 
-router.post('/upload', validateToken, upload.single('file'), fileTypeValidator, async (req, res) => {
+router.post('/upload', upload.single('file'), validateToken, fileTypeValidator, async (req, res) => {
     try
     {
         const expiry = req.body.expiry;
@@ -28,16 +28,14 @@ router.post('/upload', validateToken, upload.single('file'), fileTypeValidator, 
 
         fs.unlinkSync(req.file.path);
         
-        await axios.get('https://url-shortner-s1t7.onrender.com');
+        await axios.get('https://url-shortner-backend.yashvs34.me');
         
-        const response = await axios.post('https://url-shortner-s1t7.onrender.com/shorten', {
+        const response = await axios.post('https://url-shortner-backend.yashvs34.me/shorten', {
             url : result.url,
             clientType : 'backend'
         });
         
         const shortId = response.data.shortUrl;
-
-        console.log(req.body.userName);
 
         const createdFile = await File.create({ 
             userName : req.body.userName,

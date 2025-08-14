@@ -17,11 +17,13 @@ async function deleteData ()
     }
 }
 
-async function findData ({user})
+async function findData ({userName})
 {
     try
     {
-        return await File.find({user});
+        const user = await File.find({userName});
+        console.log(user);
+        return user;
     }
     catch (error)
     {

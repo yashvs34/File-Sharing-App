@@ -35,7 +35,6 @@ router.post('/signin', signinValidator, async (req, res) => {
         {
             res.json({
                 message : "Valid user",
-                userData : await findData({userName})
             });
             return;
         }
@@ -45,7 +44,6 @@ router.post('/signin', signinValidator, async (req, res) => {
         res.json({
             "message" : "User signin successfull",
             token : token,
-            userData : await findData({userName})
         });
 
         return;
