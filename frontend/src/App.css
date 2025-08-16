@@ -5,19 +5,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
 }
 
 .signin-container
 {
-    height: 250px;
-    width: 500px;
-    display: grid;
-    grid-template-rows: 40px 100px 20px 40px 20px;  
+    height: 500px;
+    width: 450px;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 2px solid white;
 }
 
 .signin-text
@@ -29,72 +28,107 @@
     color: rgba(255, 255, 255, 0.874);
     font-size: 35px;
     font-weight: bolder;
+    margin-bottom: 10px;
 }
 
-.welcome-text
+.signin-welcome-text
 {
-    color: wheat;
+    color: rgb(160, 160, 160);
+    margin-bottom: 30px;
+}
+
+.signup-login-tab
+{
+    display: flex;
+    border: 2px solid rgba(255, 255, 255, 0.612);
+    border-radius: 10px;
+    width: 300px;
+    height: 40px;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.signup-tab, .login-tab
+{
+    height: 40px;
+    flex: 1;
+    background: none;
+    border: none;
+    font-weight: 550;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    color: rgb(159, 159, 159);
+}
+
+.signup-tab:hover, .login-tab:hover
+{
+    cursor: pointer;
+    color: white;
+    transition-duration: 200ms;
+}
+
+.signup-tab:focus, .login-tab:focus
+{
+    border: 2px solid white;
+    border-radius: 10px;
+    background: rgba(28, 28, 60, 0.612);
+    color: white;
 }
 
 .signin-input-container
 {
-    height: 80px;
+    height: 170px;
     width: 400px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
 }
 
-.signin-email-input
+.signin-email-input, .signin-password-input
 {
     outline: none;
     height: 45px;
+    width: 300px;
     font-size: 15px;
     padding: 5px;
-    border: 1px solid rgba(255, 255, 255, 0.603);
-    border-radius: 5px;
+    padding-left: 12px;
+    border: 2px solid rgba(255, 255, 255, 0.603);
+    border-radius: 10px;
     color: white;
 }
 
-.signin-password-input
+.signin-email-input:focus, .signin-password-input:focus
 {
-    outline: none;
-    height: 45px;
-    font-size: 15px;
-    padding: 5px;
-    border: 1px solid rgba(255, 255, 255, 0.603);
-    border-radius: 5px;
-    color: white;
+    transition-duration: 200ms;
+    border: 2px solid rgb(109, 73, 206);
 }
 
-.signin-current-state
+.signin-email-input::placeholder, .signin-password-input::placeholder
 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: red;
+    color: white;
 }
 
 .signin-button
 {
-    height: 30px;
-    width: 250px;
+    height: 40px;
+    width: 300px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background-color: rgb(53, 53, 255);
+    background-color: rgb(57, 57, 57);
     color: white;
     font-size: 18px;
     font-weight: bold;
     border: 0px solid white;
-    border-radius: 40px;
+    border-radius: 10px;
+    margin-bottom: 10px;
 }
 
 .signin-button:hover
 {
-    transform: scale(1.1);
     background-color: rgb(53, 53, 255);
     transition-duration: 300ms;
     cursor: pointer;
@@ -102,39 +136,28 @@
 
 .signin-button:focus
 {
-    transform: scale(1.1);
     background-color: rgb(53, 53, 255);
     transition-duration: 300ms;
     cursor: pointer;
 }
 
-.signup-in-signin
+.initial-current-state
 {
+    opacity: 0;
+    height: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
+    color: red;
 }
 
-.signup-in-signin-text
+.signin-current-state
 {
-    font-size: 15px;
-    color: white;
-}
-
-.signup-in-signin-link
-{
-    margin: 5px;
-    cursor: pointer;
-    text-decoration: underline;
-    color: rgb(110, 110, 255);
-    font-size: 20px;
-}
-
-.signup-in-signin-link:hover
-{
-    transform: scale(1.1);
-    color: blue;
-    transition-duration: 300ms;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: red;
 }
 
 /* -------------------------------SIGNUP COMPONENT------------------------------- */
@@ -145,18 +168,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
 }
 
 .signup-container
 {
-    height: 300px;
-    width: 300px;
-    display: grid;
-    grid-template-rows: 40px 150px 20px 40px 20px;
-    border-radius: 15px;
-    box-shadow: 0 0 10px grey;
+    height: 500px;
+    width: 450px;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -167,91 +188,110 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    color: rgba(255, 255, 255, 0.874);
     font-size: 35px;
     font-weight: bolder;
+    margin-bottom: 10px;
+}
+
+.signup-welcome-text
+{
+    color: rgb(160, 160, 160);
+    margin-bottom: 30px;
+}
+
+.signup-login-tab
+{
+    display: flex;
+    border: 2px solid rgba(255, 255, 255, 0.612);
+    border-radius: 10px;
+    width: 300px;
+    height: 40px;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.signup-tab, .login-tab
+{
+    height: 40px;
+    flex: 1;
+    background: none;
+    border: none;
+    font-weight: 550;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    color: rgb(159, 159, 159);
+}
+
+.signup-tab:hover, .login-tab:hover
+{
+    cursor: pointer;
+    color: white;
+    transition-duration: 200ms;
+}
+
+.signup-tab:focus, .login-tab:focus
+{
+    border: 2px solid white;
+    border-radius: 10px;
+    background: rgba(28, 28, 60, 0.612);
     color: white;
 }
 
 .signup-input-container
 {
-    height: 140px;
+    height: 170px;
+    width: 400px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
 }
 
-.signup-email-input
+.signup-email-input, .signup-password-input, .signup-firstName-input, .signup-lastName-input
 {
     outline: none;
-    height: 35px;
+    height: 45px;
+    width: 300px;
     font-size: 15px;
     padding: 5px;
-    border: 1px solid white;
-    border-bottom: 2px solid blue;
-    border-radius: 5px;
+    padding-left: 12px;
+    border: 2px solid rgba(255, 255, 255, 0.603);
+    border-radius: 10px;
+    color: white;
 }
 
-.signup-password-input
+.signin-email-input:focus, .signin-password-input:focus
 {
-    outline: none;
-    height: 35px;
-    font-size: 15px;
-    padding: 5px;
-    border: 1px solid white;
-    border-bottom: 2px solid blue;
-    border-radius: 5px;
+    transition-duration: 200ms;
+    border: 2px solid rgb(109, 73, 206);
 }
 
-.signup-firstName-input
+.signin-email-input::placeholder, .signin-password-input::placeholder
 {
-    outline: none;
-    height: 35px;
-    font-size: 15px;
-    padding: 5px;
-    border: 1px solid white;
-    border-bottom: 2px solid blue;
-    border-radius: 5px;
-}
-
-.signup-lastName-input
-{
-    outline: none;
-    height: 35px;
-    font-size: 15px;
-    padding: 5px;
-    border: 1px solid white;
-    border-bottom: 2px solid blue;
-    border-radius: 5px;
-}
-
-.signup-current-state
-{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: red;
+    color: white;
 }
 
 .signup-button
 {
-    height: 30px;
-    width: 250px;
+    height: 40px;
+    width: 300px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background-color: rgb(53, 53, 255);
+    background-color: rgb(57, 57, 57);
     color: white;
     font-size: 18px;
     font-weight: bold;
     border: 0px solid white;
-    border-radius: 40px;
+    border-radius: 10px;
+    margin-bottom: 10px;
 }
 
 .signup-button:hover
 {
-    transform: scale(1.1);
     background-color: rgb(53, 53, 255);
     transition-duration: 300ms;
     cursor: pointer;
@@ -259,39 +299,18 @@
 
 .signup-button:focus
 {
-    transform: scale(1.1);
-    background-color: rgb(3, 3, 229);
+    background-color: rgb(53, 53, 255);
     transition-duration: 300ms;
     cursor: pointer;
 }
 
-.signin-in-signup
+.signup-current-state
 {
+    height: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
-}
-
-.signin-in-signup-text
-{
-    font-size: 15px;
-}
-
-.signin-in-signup-link
-{
-    margin: 5px;
-    cursor: pointer;
-    text-decoration: underline;
-    color: rgb(110, 110, 255);
-    font-size: 20px;
-}
-
-.signin-in-signup-link:hover
-{
-    transform: scale(1.1);
-    color: blue;
-    transition-duration: 300ms;
+    color: red;
 }
 
 /* -------------------------------DASHBOARD COMPONENT------------------------------- */

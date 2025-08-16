@@ -1,73 +1,51 @@
-import { useState } from "react"
-import { useNavigate } from "react-router-dom";
-import axios from "axios"
-import { useRecoilState } from "recoil";
-import { authState } from "../atoms/authAtom";
-import { useEffect } from "react";
-import { userState } from "../atoms/userAtom";
-import signinState from "../atoms/signinStateAtom";
+import { useState } from "react";
 import DarkVeil from './DarkVeil';
+import { useRecoilState } from "recoil";
+import signinState from "../atoms/signinStateAtom";
+import { useNavigate } from "react-router-dom";
 
-function Signin ()
+function LoginComponent ()
 {
-    const [emailInput, setEmailInput] = useState();
-    const [passwordInput, setPasswordInput] = useState();
-    const [auth, setAuth] = useRecoilState(authState);
-    const [user, setUser] = useRecoilState(userState);
+    const [loginComponent, setLoginComponent] = useState("signin");
+    const [emailInput, setEmailInput] = useState("signin");
+    const [passwordInput, setPasswordInput] = useState("signin");
     const [currentState, setCurrentState] = useRecoilState(signinState);
-
     const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     const verifyToken = async () => {
-    //         const token = localStorage.getItem("authToken");
-    
-    //         if (token)
-    //         {
-    //             const response = await axios.post('http://localhost:8081/signin', {
-    //                 "token" : token
-    //             });
-
-    //             if (response.data.message === "Valid user")
-    //             {
-    //                 setCurrentState({
-    //                     signinState : "Signin successfull"
-    //                 });
-    //                 setAuth({
-    //                     isLoggedIn : true
-    //                 });
-    //                 setUser({
-    //                     user : response.data.userData
-    //                 });
-    //                 navigate('/dashboard');
-    //             }
-    //         }
-
-    //         return;
-    //     }
-
-    //     verifyToken();
-    // }, [auth.isLoggedIn]);
 
     return (
         <>
             <div style={{position: "fixed",top: 0,left: 0,width: "100%",height: "100%",zIndex: 0,pointerEvents: "none"}}>
                 <DarkVeil />
             </div>
-            
+
             <div className="signin-page" style={{ position: "relative", zIndex: 1 }}>
                 <div className="signin-container">
                     <div className="signin-text">
-                        Login to Your Account
+                        {loginComponent === "signin" ? "Log in to your account" : "Create a new account"}
                     </div>
 
-                    <div className="welcome-text">
-                        Welcome back! Please enter your details.
+                    <div className="signin-welcome-text">
+                        {loginComponent === "signin" ? "Welcome back! Please enter your details." : "Welcome! Please enter your details."}
+                    </div>
+
+                    <div className="signup-login-tab">
+                        <button className="signup-tab" onClick={() => {
+                            setLoginComponent("signup");
+                        }}>
+                            Sign up
+                        </button>
+
+                        <button className="login-tab" onClick={() => {
+                            setLoginComponent("signin");
+                        }}>
+                            Login
+                        </button>
                     </div>
 
                     <div className="signin-input-container">
                         <div>
-                            <input type="email" style={{background:"transparent"}} placeholder="Enter email" className="signin-email-input" onChange={(event) => {
+                            <input type="email" style={{background:"transparent"}} placeholder="Enter your email" className="signin-email-input" onChange={(event) => {
                                 setEmailInput(event.target.value);
                             }} />
                         </div>
@@ -79,26 +57,24 @@ function Signin ()
                         </div>
                     </div>
 
-                    {<div className="signin-current-state">{currentState.signinState}</div>}
-
                     <button className="signin-button" onClick={async () => {
                         setCurrentState({
                             signinState : "Signing you in..."
                         });
 
-                        const response = await axios.post('http://localhost:8081/signin', {
+                        const response = await axios.post(`http://localhost:8081/${loginComponent}`, {
                             userName : emailInput,
                             password : passwordInput
                         });
 
-                        if (response.data === "Invalid username")
+                        if (response.data.message === "Invalid username")
                         {
                             setCurrentState({
                                 signinState : "No user found!"
                             });
                             return;
                         }
-                        else if (response.data === "Invalid password")
+                        else if (response.data.message === "Invalid password")
                         {
                             setCurrentState({
                                 signinState : "Invalid password!"
@@ -110,12 +86,7 @@ function Signin ()
                             setCurrentState({
                                 signinState : "Signin successfull"
                             });
-                            setAuth({
-                                isLoggedIn : true
-                            });
-                            setUser({
-                                user : response.data.userData
-                            });
+                            navigate('/dashboard');
                             return;
                         }
                         else if (response.data.message === "User signin successfull")
@@ -124,12 +95,29 @@ function Signin ()
                                 signinState : "Signin successfull"
                             });
                             localStorage.setItem("authToken", response.data.token);
-                            setAuth({
-                                isLoggedIn : true
+                            navigate('/dashboard');
+                            return;
+                        }
+                        else if (response.data.message === "Invalid inputs")
+                        {
+                            setCurrentState({
+                                signinState : "Invalid inputs!"
                             });
-                            setUser({
-                                user : response.data.userData
+                            return;
+                        }
+                        else if (response.data.message === "User already exists")
+                        {
+                            setCurrentState({
+                                signinState : "Account already exists, please Signin"
                             });
+                            return;
+                        }
+                        else if (response.data.message === "Account created successfully")
+                        {
+                            setCurrentState({
+                                signinState : "Account created successfully!"
+                            });
+                            setLoginComponent("signin");
                             return;
                         }
 
@@ -141,20 +129,12 @@ function Signin ()
                         Submit
                     </button>
 
-                    <div className="signup-in-signin">
-                        <div className="signup-in-signin-text">
-                            Don't have an account?
-                        </div>
-                        <div className="signup-in-signin-link" onClick={() => {
-                            navigate('/signup');
-                        }}>
-                            Signup
-                        </div>
-                    </div>
+                    <div className={currentState.signinState === "INITIAL" ? "initial-current-state" : "signin-current-state"}>{currentState.signinState}</div>
+                    
                 </div>
             </div>
         </>
     )
 }
 
-export default Signin
+export default LoginComponent
