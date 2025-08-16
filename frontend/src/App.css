@@ -12,13 +12,12 @@
 .signin-container
 {
     height: 250px;
-    width: 300px;
+    width: 500px;
     display: grid;
-    grid-template-rows: 40px 100px 20px 40px 20px;
-    border-radius: 15px;
-    box-shadow: 0 0 10px grey;
+    grid-template-rows: 40px 100px 20px 40px 20px;  
     justify-content: center;
     align-items: center;
+    border: 2px solid white;
 }
 
 .signin-text
@@ -27,13 +26,20 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    color: rgba(255, 255, 255, 0.874);
     font-size: 35px;
     font-weight: bolder;
+}
+
+.welcome-text
+{
+    color: wheat;
 }
 
 .signin-input-container
 {
     height: 80px;
+    width: 400px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -43,23 +49,23 @@
 .signin-email-input
 {
     outline: none;
-    height: 35px;
+    height: 45px;
     font-size: 15px;
     padding: 5px;
-    border: 1px solid white;
-    border-bottom: 2px solid blue;
+    border: 1px solid rgba(255, 255, 255, 0.603);
     border-radius: 5px;
+    color: white;
 }
 
 .signin-password-input
 {
     outline: none;
-    height: 35px;
+    height: 45px;
     font-size: 15px;
     padding: 5px;
-    border: 1px solid white;
-    border-bottom: 2px solid blue;
+    border: 1px solid rgba(255, 255, 255, 0.603);
     border-radius: 5px;
+    color: white;
 }
 
 .signin-current-state
@@ -78,7 +84,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background-color: rgb(17, 17, 123);
+    background-color: rgb(53, 53, 255);
     color: white;
     font-size: 18px;
     font-weight: bold;
@@ -89,7 +95,7 @@
 .signin-button:hover
 {
     transform: scale(1.1);
-    background-color: rgb(3, 3, 229);
+    background-color: rgb(53, 53, 255);
     transition-duration: 300ms;
     cursor: pointer;
 }
@@ -97,7 +103,7 @@
 .signin-button:focus
 {
     transform: scale(1.1);
-    background-color: rgb(3, 3, 229);
+    background-color: rgb(53, 53, 255);
     transition-duration: 300ms;
     cursor: pointer;
 }
@@ -112,6 +118,7 @@
 .signup-in-signin-text
 {
     font-size: 15px;
+    color: white;
 }
 
 .signup-in-signin-link
@@ -162,6 +169,7 @@
     align-items: center;
     font-size: 35px;
     font-weight: bolder;
+    color: white;
 }
 
 .signup-input-container
@@ -233,7 +241,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background-color: rgb(17, 17, 123);
+    background-color: rgb(53, 53, 255);
     color: white;
     font-size: 18px;
     font-weight: bold;
@@ -244,7 +252,7 @@
 .signup-button:hover
 {
     transform: scale(1.1);
-    background-color: rgb(3, 3, 229);
+    background-color: rgb(53, 53, 255);
     transition-duration: 300ms;
     cursor: pointer;
 }
@@ -262,6 +270,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    color: white;
 }
 
 .signin-in-signup-text
@@ -293,10 +302,85 @@
     width: 100%;
 }
 
-.file-input-container
+.upload-file-container
 {
     height: 100px;
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+.file-input-container
+{
+    display: flex;
+    justify-content: center;
     align-items: end;
+}
+
+.input-container
+{
+    position: relative;
+    z-index: 20;
+    width: 100px;
+    border: 2px solid yellow;
+    opacity: 0;
+}
+
+.input-cover
+{
+    position: absolute;
+    z-index: 0;
+    width: 100px;
+    color: white;
+    cursor: pointer;
+    color: rgb(198, 198, 198);
+}
+
+.file-expiry-container
+{
+    display: flex;
+    width: 300px;
+    justify-content: space-between;
+    color: yellow;
+}
+
+.upload-button
+{
+    color: yellow;
+    cursor: pointer;
+}
+
+.files-container
+{
+    display: flex;
+    flex-direction: column;
+    color: yellow;
+}
+
+.file-container
+{
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    border-bottom: 1px solid rgb(164, 164, 164);
+}
+
+.share-file
+{
+    cursor: pointer;
+}
+
+.sharing-component
+{
+    position: relative;
+    top: -20px;
+    left: 50px;
+    height: 2px;
+}
+
+.share-button
+{
+    cursor: pointer;
 }
