@@ -6,6 +6,7 @@ import { authState } from "../atoms/authAtom";
 import { useEffect } from "react";
 import { userState } from "../atoms/userAtom";
 import signinState from "../atoms/signinStateAtom";
+import DarkVeil from './DarkVeil';
 
 function Signin ()
 {
@@ -50,21 +51,29 @@ function Signin ()
 
     return (
         <>
-            <div className="signin-page">
+            <div style={{position: "fixed",top: 0,left: 0,width: "100%",height: "100%",zIndex: 0,pointerEvents: "none"}}>
+                <DarkVeil />
+            </div>
+            
+            <div className="signin-page" style={{ position: "relative", zIndex: 1 }}>
                 <div className="signin-container">
                     <div className="signin-text">
-                        Signin
+                        Login to Your Account
+                    </div>
+
+                    <div className="welcome-text">
+                        Welcome back! Please enter your details.
                     </div>
 
                     <div className="signin-input-container">
                         <div>
-                            <input type="email" placeholder="Enter email" className="signin-email-input" onChange={(event) => {
+                            <input type="email" style={{background:"transparent"}} placeholder="Enter email" className="signin-email-input" onChange={(event) => {
                                 setEmailInput(event.target.value);
                             }} />
                         </div>
 
                         <div>
-                            <input type="password" placeholder="Enter password" className="signin-password-input" onChange={(event) => {
+                            <input type="password" style={{background:"transparent"}} placeholder="Enter password" className="signin-password-input" onChange={(event) => {
                                 setPasswordInput(event.target.value);
                             }} />
                         </div>

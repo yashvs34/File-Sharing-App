@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import DarkVeil from './DarkVeil';
 
 function Signup ()
 {
@@ -14,7 +15,10 @@ function Signup ()
 
     return (
         <>
-            <div className="signup-page">
+            <div style={{position: "fixed",top: 0,left: 0,width: "100%",height: "100%",zIndex: 0,pointerEvents: "none"}}>
+                <DarkVeil />
+            </div>
+            <div className="signup-page" style={{ position: "relative", zIndex: 1 }}>
                 <div className="signup-container">
                     <div className="signup-text">
                         Signup
