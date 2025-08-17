@@ -17,7 +17,7 @@ function FileShareComponent ({userData})
                 setEmail(event.target.value);
             }}/>
             <div className="share-button" onClick={() => {
-                axios.post('http://localhost:8081/send', {
+                axios.post('https://swiftly-backend.yashvs34.me/send', {
                     "token" : localStorage.getItem("authToken"),
                     "emailFrom" : "yashvardhansingh232@gmail.com",
                     "emailTo" : email,

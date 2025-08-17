@@ -20,7 +20,7 @@ function Dashboard ()
 
     useEffect(() => {
         const dataFunction = async () => {
-            const data = await axios.post('http://localhost:8081/user', {
+            const data = await axios.post('https://swiftly-backend.yashvs34.me/user', {
                 userName : user.userName,
                 token : localStorage.getItem("authToken")
             });
@@ -57,7 +57,7 @@ function Dashboard ()
                         formData.append("file", file);
                         formData.append("expiry", expiry);
                         formData.append("token", localStorage.getItem("authToken"));
-                        axios.post('http://localhost:8081/upload', formData, {
+                        axios.post('https://swiftly-backend.yashvs34.me/upload', formData, {
                             headers:{
                                 "Content-Type": "multipart/form-data",
                             }

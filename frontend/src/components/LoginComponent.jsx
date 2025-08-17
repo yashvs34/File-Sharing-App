@@ -3,10 +3,13 @@ import DarkVeil from './DarkVeil';
 import { useRecoilState } from "recoil";
 import signinState from "../atoms/signinStateAtom";
 import { useNavigate } from "react-router-dom";
+import RotatingComponent from "./RotatingComponent";
+import axios from 'axios'
 
 function LoginComponent ()
 {
     const [loginComponent, setLoginComponent] = useState("signin");
+    const [loadingComponent, setLoadingComponent] = useState();
     const [emailInput, setEmailInput] = useState("signin");
     const [passwordInput, setPasswordInput] = useState("signin");
     const [currentState, setCurrentState] = useRecoilState(signinState);
@@ -61,11 +64,14 @@ function LoginComponent ()
                         setCurrentState({
                             signinState : "Signing you in..."
                         });
+                        setLoadingComponent(true);
 
-                        const response = await axios.post(`http://localhost:8081/${loginComponent}`, {
+                        const response = await axios.post(`https://swiftly-backend.yashvs34.me/${loginComponent}`, {
                             userName : emailInput,
                             password : passwordInput
                         });
+
+                        setLoadingComponent(false);
 
                         if (response.data.message === "Invalid username")
                         {
@@ -126,10 +132,10 @@ function LoginComponent ()
                         });
                         return;
                     }}>
-                        {loginComponent === "signin" ? "Login" : "Signup"}
+                        {loadingComponent ? <RotatingComponent/> : (loginComponent === "signin" ? "Login" : "Signup")}
                     </button>
 
-                    <div className={currentState.signinState === "INITIAL" ? "initial-current-state" : "signin-current-state"}>{currentState.signinState}</div>
+                    <div className={currentState.signinState === "INITIAL" ? "initial-current-state" : "signin-current-state"}>{loadingComponent ? "" : (currentState.signinState === "Signing you in..." ? "" : currentState.signinState)}</div>
                     
                 </div>
             </div>
