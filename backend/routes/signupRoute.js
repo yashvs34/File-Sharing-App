@@ -15,7 +15,9 @@ router.post('/signup', signupValidator, async (req, res) => {
         
         if (result)
         {
-            res.send('User already exists');
+            res.json({
+                message : 'User already exists'
+            });
             return;
         }
             
@@ -23,12 +25,17 @@ router.post('/signup', signupValidator, async (req, res) => {
 
         await saveUser({userName, hashedPassword});
         
-        res.send('Account created successfully');
+        res.json({
+            message : 'Account created successfully'
+        });
     }
     catch (error)
     {
         console.log(error);
-        res.send('Error while signing up');
+        
+        res.json({
+            message : 'Error while signing up'
+        });
     }
 });
 

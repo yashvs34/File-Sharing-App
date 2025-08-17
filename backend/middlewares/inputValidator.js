@@ -19,7 +19,9 @@ function signupValidator(req, res, next)
 
     if (!result.success)
     {
-        res.send('Invalid inputs');
+        res.json({
+            message : 'Invalid inputs'
+        });
     }
 
     next();
@@ -34,7 +36,9 @@ function signinValidator(req, res, next)
 
     if (!result.success)
     {
-        res.send('Invalid inputs');
+        res.json({
+            message : 'Invalid inputs'
+        });
         return;
     }
 

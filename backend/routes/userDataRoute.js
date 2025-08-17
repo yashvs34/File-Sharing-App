@@ -14,6 +14,9 @@ router.post('/user', validateToken, async (req, res) => {
     catch (error)
     {
         console.log("Error while fetching user data", error);
+        res.json({
+            message : "Error while fetching user data"
+        });
     }
 });
 

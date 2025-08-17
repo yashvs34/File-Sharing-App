@@ -22,7 +22,9 @@ async function validateToken (req, res, next)
         
         if (!user)
         {
-            return res.json("Invalid user");
+            return res.json({
+                message : "Invalid user"
+            });
         }
     
         req.body.userName = userName;
@@ -31,7 +33,9 @@ async function validateToken (req, res, next)
     catch (error)
     {
         console.log("Error while validating token", error);
-        res.send("Some error occurred");
+        res.json({
+            message : 'Some error occurred'
+        })
         return;
     }
 }

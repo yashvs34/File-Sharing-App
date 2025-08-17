@@ -13,12 +13,16 @@ function fileTypeValidator (req, res, next)
         }
         else
         {
-            res.send('File is too big');
+            res.json({
+                message : 'File is too big'
+            });
         }
     }
     else
     {
-        res.send('Given file type is not supported for uploading');
+        res.json({
+            message : 'Given file type is not supported for uploading'
+        });
     }
 }
 
