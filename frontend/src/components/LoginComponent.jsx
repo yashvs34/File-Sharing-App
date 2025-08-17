@@ -126,7 +126,7 @@ function LoginComponent ()
                         });
                         return;
                     }}>
-                        Submit
+                        {loginComponent === "signin" ? "Login" : "Signup"}
                     </button>
 
                     <div className={currentState.signinState === "INITIAL" ? "initial-current-state" : "signin-current-state"}>{currentState.signinState}</div>

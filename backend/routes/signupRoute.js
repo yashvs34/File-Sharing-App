@@ -10,8 +10,6 @@ router.post('/signup', signupValidator, async (req, res) => {
     {
         const userName = req.body.userName;
         const password = req.body.password;
-        const firstName = req.body.firstName;
-        const lastName = req.body.lastName;
 
         const result = await findUser({userName});
         
@@ -23,7 +21,7 @@ router.post('/signup', signupValidator, async (req, res) => {
             
         const hashedPassword = await hashPassword(password);
 
-        await saveUser({userName, hashedPassword, firstName, lastName});
+        await saveUser({userName, hashedPassword});
         
         res.send('Account created successfully');
     }
