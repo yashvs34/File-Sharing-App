@@ -13,12 +13,17 @@ router.post('/send', validateToken, async (req, res) => {
         const size = req.body.size;
 
         await sendMail({emailFrom, emailTo, link, fileName, size});
-        res.send("Email sent successfully");
+        res.json({
+            message : "Email sent successfully"
+        });
     }
     catch (error)
     {
         console.log("Error in sending mail", error);
-        res.send("Some error occured");
+        
+        res.json({
+            message : "Some error occured"
+        });
     }
 });
 

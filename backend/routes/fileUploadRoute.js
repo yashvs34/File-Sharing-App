@@ -18,7 +18,9 @@ router.post('/upload', upload.single('file'), validateToken, fileTypeValidator, 
 
         if (!req.file)
         {
-            res.send("No file uploaded");
+            res.json({
+                message : "No file uploaded"
+            });
             return;
         }
 
@@ -52,7 +54,9 @@ router.post('/upload', upload.single('file'), validateToken, fileTypeValidator, 
     catch (error)
     {
         console.log(error);
-        res.send("Error while uploading file");
+        res.json({
+            message : "Error while uploading file"
+        })
     }
 });
 

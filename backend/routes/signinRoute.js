@@ -20,7 +20,9 @@ router.post('/signin', signinValidator, async (req, res) => {
 
         if (!user)
         {
-            res.send('Invalid username');
+            res.json({
+                message : 'Invalid username'
+            });
             return;
         }
         
@@ -28,7 +30,9 @@ router.post('/signin', signinValidator, async (req, res) => {
 
         if (!match)
         {
-            res.send('Invalid password');
+            res.json({
+                message : 'Invalid password'
+            });
             return;
         }
         else if (decoded)
@@ -51,7 +55,9 @@ router.post('/signin', signinValidator, async (req, res) => {
     catch (error)
     {
         console.log(error);
-        res.send("Error while signing in");
+        res.json({
+            message : "Error while signing in"
+        });
     }
 });
 
