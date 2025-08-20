@@ -15,14 +15,8 @@ function FileData ({userData})
                 {Math.ceil((new Date(userData.expiryAt) - new Date()) / (1000 * 60 * 60 * 24))}
             </div>
 
-            <div onClick={() => {
-                setClicked(!clicked);
-            }} className="share-file">
-                Share
-
-                <div>
-                    {clicked ? <FileShareComponent userData={userData} /> : <FileShareComponent userData={userData} />}
-                </div>
+            <div className="share-file">
+                <FileShareComponent userData={userData} />
             </div>
 
         </div>
