@@ -25,7 +25,7 @@ router.post('/upload', upload.single('file'), validateToken, fileTypeValidator, 
         }
 
         const result = await cloudinary.uploader.upload(req.file.path, {
-            resource_type : 'auto'
+            resource_type : 'raw'
         });
 
         fs.unlinkSync(req.file.path);

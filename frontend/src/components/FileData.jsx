@@ -18,9 +18,10 @@ function FileData ({userData})
                 </div>
 
                 <div onClick={() => {
-                    setClicked(!clicked);
+                    // setClicked(!clicked);
+                    window.open(userData.cloudinaryUrl, "_blank");
                 }}>
-                    <img src="./image.jpg" className="eye-image" />
+                    <img src="./hidden.png" className="eye-image" />
                 </div>
 
                 <div className="more-info-button">
