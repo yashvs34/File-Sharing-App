@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { userState } from "../atoms/userAtom";
 import axios from 'axios';
 import FileData from "./FileData";
-import Squares from './Squares';
+import LiquidEther from './LiquidEther';
 
 function Dashboard ()
 {
@@ -26,7 +26,7 @@ function Dashboard ()
             });
             
             setUserData(data.data);
-            console.log(data.data);  
+            console.log(data.data);
         }
         
         dataFunction();
@@ -34,8 +34,8 @@ function Dashboard ()
 
     return (
         <>
-            <div style={{position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh", zIndex: 0, pointerEvents: "none"}}>
-                <Squares speed={0.5} squareSize={40} direction='diagonal' diagonalborderColor='#675151ff' hoverFillColor='#222'/>
+            <div style={{ width: '100%', height: 600, position: 'fixed', zIndex: 0 }}>
+                <LiquidEther colors={[ '#5227FF', '#FF9FFC', '#B19EEF' ]} mouseForce={15} cursorSize={100} isViscous={false} viscous={30} iterationsViscous={32} iterationsPoisson={32} resolution={0.5} isBounce={false} autoDemo={true} autoSpeed={0.5} autoIntensity={2.2} takeoverDuration={0.25} autoResumeDelay={3000} autoRampDuration={0.6} />
             </div>
 
             <div className="dashboard" style={{ position: "relative", zIndex: 1 }}>
@@ -44,11 +44,11 @@ function Dashboard ()
                         <input type="file" className="input-container" onChange={(event) => {
                             setFile(event.target.files[0]);
                         }} />
-                        <div className="input-cover" >Upload File</div>
+                        {/* <div className="input-cover" >Upload File</div> */}
                     </div>
                     <div className="file-expiry-container">
                         <div>Choose expiry date : </div>
-                        <input type="date" min={new Date(Date.now() + 2 * 86400000).toISOString().split("T")[0]} onChange={(event) => {
+                        <input type="date" className="file-expiry-input" min={new Date(Date.now() + 2 * 86400000).toISOString().split("T")[0]} onChange={(event) => {
                             setExpiry(event.target.value);
                         }}/>
                     </div>
@@ -66,7 +66,6 @@ function Dashboard ()
                         Upload
                     </div>
                 </div>
-
                 <div className="files-container">
                     {userData.length > 0 ? userData.map((fileInfo, index) => (
                         <FileData key={index} userData={fileInfo}/>

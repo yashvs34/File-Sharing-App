@@ -10,10 +10,7 @@ function FileShareComponent ({userData})
 
     return (
         <>
-            <div className="sharing-component">
-                Enter Email to send to
-            </div>
-            <input type="text" name="" id="" onChange={(event) => {
+            <input type="text" className="email-input" placeholder="Enter Email to send to" name="" id="" onChange={(event) => {
                 setEmail(event.target.value);
             }}/>
             <div className="share-button" onClick={() => {
