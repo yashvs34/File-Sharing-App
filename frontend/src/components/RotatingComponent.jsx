@@ -7,6 +7,8 @@ function RotatingComponent() {
           .rotating-circle {
             width: 30px;
             height: 30px;
+            position: absolute;
+            z-index: 2;
             border: 6px dotted white;
             border-top: 6px solid transparent;
             border-radius: 50%;
