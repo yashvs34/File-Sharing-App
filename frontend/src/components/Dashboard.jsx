@@ -43,9 +43,18 @@ function Dashboard ()
 
             <div className="dashboard" style={{ position: "relative", zIndex: 1 }}>
                 <div className="upload-file-container" >
-                    <div className="option-wrapper" onClick={() => setOptionClicked(!optionClicked)}>
-                        <img src="option.png" className={`option-image ${optionClicked ? "hidden" : ""}`} />
-                        <img src="x-button.png" className={`option-image ${optionClicked ? "" : "hidden"}`} />
+                    <div className="header-container">
+                        <div className="signout-container">
+                            <img src="./signout.png" className="signout-image" onClick={() => {
+                                localStorage.removeItem("authToken");
+                                navigate('/');
+                            }} />
+                        </div>
+
+                        <div className="option-wrapper" onClick={() => setOptionClicked(!optionClicked)}>
+                            <img src="option.png" className={`option-image ${optionClicked ? "hidden" : ""}`} />
+                            <img src="x-button.png" className={`option-image ${optionClicked ? "" : "hidden"}`} />
+                        </div>
                     </div>
                     {optionClicked ? 
                     <div className="upload-show-container">
