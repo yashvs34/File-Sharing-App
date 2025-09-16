@@ -7,14 +7,15 @@ import axios from 'axios';
 import FileData from "./FileData";
 import LiquidEther from './LiquidEther';
 import RotatingComponent from './RotatingComponent'
+import NoFileComponent from './NoFileComponent'
 
 function Dashboard ()
 {
     const [user, setUser] = useRecoilState(userState);
     const [userData, setUserData] = useState([]);
     const [optionClicked, setOptionClicked] = useState(false);
-    const [file, setFile] = useState();
-    const [expiry, setExpiry] = useState();
+    const [file, setFile] = useState(null);
+    const [expiry, setExpiry] = useState(null);
     const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
@@ -41,11 +42,7 @@ function Dashboard ()
 
 
             <div className="dashboard" style={{ position: "relative", zIndex: 1 }}>
-
                 <div className="upload-file-container" >
-                    {/* <img src={optionClicked ? `x-button.png` : `option.png`} className="option-image" onClick={() => {
-                        setOptionClicked(!optionClicked);
-                    }}/> */}
                     <div className="option-wrapper" onClick={() => setOptionClicked(!optionClicked)}>
                         <img src="option.png" className={`option-image ${optionClicked ? "hidden" : ""}`} />
                         <img src="x-button.png" className={`option-image ${optionClicked ? "" : "hidden"}`} />
@@ -67,7 +64,23 @@ function Dashboard ()
                             {loading ? <RotatingComponent/> : <div className="upload-button" onClick={async () => {
                                 setLoading(true);
                                 const formData = new FormData();
+
+                                if (!file)
+                                {
+                                    alert("No file chosen");
+                                    setLoading(false);
+                                    return;
+                                }
+
                                 formData.append("file", file);
+
+                                if (!expiry)
+                                {
+                                    alert("Enter valid expiry date!");
+                                    setLoading(false);
+                                    return;
+                                }
+
                                 formData.append("expiry", expiry);
                                 formData.append("token", localStorage.getItem("authToken"));
                                 const result = await axios.post('https://swiftly-backend.yashvs34.me/upload', formData, {
@@ -76,7 +89,14 @@ function Dashboard ()
                                     }
                                 });
                                 setLoading(false);
-                                window.location.reload();
+                                if (result.message)
+                                {
+                                    alert('Please specify expiry date!');
+                                }
+                                else
+                                {
+                                    window.location.reload();
+                                }
                             }}>
                                 Upload
                             </div>}
@@ -86,7 +106,7 @@ function Dashboard ()
                 <div className="files-container">
                     {userData.length > 0 ? userData.map((fileInfo, index) => (
                         <FileData key={index} userData={fileInfo}/>
-                    )) : <>No files uploaded</>}
+                    )) : <NoFileComponent/>}
                 </div>
             </div>
         </>
