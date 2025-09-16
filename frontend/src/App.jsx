@@ -1,8 +1,8 @@
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, useNavigate } from 'react-router-dom'
 import './App.css'
 import AppRoutes from './components/AppRoutes'
 
-function App ()
+function App (authToken)
 {
   return (
     <>
